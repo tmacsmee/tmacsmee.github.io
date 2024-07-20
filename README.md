@@ -1,1 +1,4 @@
-# tmacsmee.github.io
+# Personal website
+
+- Static site generation using Next.js.
+- Styling using Tailwind CSS.
