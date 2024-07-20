@@ -17,17 +17,23 @@ export default function Navlink({
   return (
     <Link href={href} className={cn("group flex flex-col items-center")}>
       <div
-        className={cn("pb-1 px-7 text-white transition-colors font-medium", {
-          ["text-sky-500"]: isActive,
-          ["hover:text-sky-500"]: !isActive,
-        })}>
+        className={cn(
+          "px-7 pb-1 font-medium text-slate-400 transition-colors",
+          {
+            ["text-sky-500"]: isActive,
+            ["hover:text-sky-500"]: !isActive,
+          },
+        )}
+      >
         {children}
       </div>
       <div
-        className={cn("h-px", {
-          ["from-transparent via-sky-500 to-transparent w-full bg-gradient-to-r"]:
-            isActive,
-        })}
+        className={cn(
+          "h-px w-full max-w-0 bg-gradient-to-r from-transparent via-sky-300 to-transparent transition-[max-width] duration-300",
+          {
+            ["max-w-full"]: isActive,
+          },
+        )}
       />
     </Link>
   )

@@ -4,24 +4,25 @@ import Logo from "../svg/logo"
 
 export default function Footer() {
   return (
-    <footer className="">
-      <div className="max-w-6xl w-screen absolute inset-x-0 mx-auto bg-slate-800 h-px" />
-      <div className="pt-8 pb-8">
-        <Link href="/about" className="group">
-          <Logo className="size-6 fill-slate-400 transition-colors group-hover:fill-sky-500" />
+    <footer>
+      <div className="absolute inset-x-0 mx-auto h-px w-screen max-w-6xl bg-slate-100" />
+      <div className="pb-8 pt-8">
+        <Link href="/about" className="group inline-block size-6">
+          <Logo className="size-full fill-slate-300 transition-colors group-hover:fill-sky-500" />
         </Link>
-        <div className="text-sm flex justify-between items-end">
-          <nav className="gap-x-8 flex mt-6">
+        <div className="flex items-end justify-between text-sm">
+          <nav className="mt-6 flex gap-x-8">
             {navlinks.map(([child, href]) => (
               <Link
                 key={href}
                 href={href}
-                className="text-slate-400 font-medium hover:text-sky-500">
+                className="font-medium text-slate-400 hover:text-sky-500"
+              >
                 {child}
               </Link>
             ))}
           </nav>
-          <span className="text-slate-500">
+          <span className="text-slate-400">
             &copy; {new Date().getFullYear()} Troy Mackenzie-Smee
           </span>
         </div>
