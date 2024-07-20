@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable}`}>
         <Theme>
-          <ThemePanel />
+          {/* <ThemePanel /> */}
           <div className="isolate min-h-screen bg-gray-50">
             <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col border-x border-x-slate-100 bg-white/70 px-8 shadow-xl lg:px-24">
               <div className="absolute -left-[300px] top-[200px] -z-10 size-[500px] rounded-full bg-blue-300/25 blur-3xl" />
