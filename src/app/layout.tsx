@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable}`}>
+      <body className={`${inter.variable} overflow-clip`}>
         <Theme>
           {/* <ThemePanel /> */}
           <div className="isolate min-h-screen bg-gray-50">

@@ -18,7 +18,7 @@ export default function Navlink({
     <Link href={href} className={cn("group flex flex-col items-center")}>
       <div
         className={cn(
-          "px-7 pb-1 font-medium text-slate-400 transition-colors",
+          "px-7 pb-1 text-sm font-medium text-slate-400 transition-colors",
           {
             ["text-sky-500"]: isActive,
             ["hover:text-sky-500"]: !isActive,
@@ -27,11 +27,19 @@ export default function Navlink({
       >
         {children}
       </div>
-      <div
+      {/* <div
         className={cn(
           "h-px w-full max-w-0 bg-gradient-to-r from-transparent via-sky-300 to-transparent transition-[max-width] duration-300",
           {
             ["max-w-full"]: isActive,
+          },
+        )}
+      /> */}
+      <div
+        className={cn(
+          "h-px w-full max-w-0 bg-sky-300 transition-[max-width] duration-300",
+          {
+            ["max-w-[75%]"]: isActive,
           },
         )}
       />

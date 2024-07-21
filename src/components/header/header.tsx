@@ -6,7 +6,7 @@ import Navlink from "./navlink"
 
 export const navlinks = [
   ["About", "/about"],
-  ["Blog", "/blog"],
+  ["Writing", "/writing"],
   ["Projects", "/projects"],
 ]
 
