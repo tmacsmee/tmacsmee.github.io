@@ -1,9 +1,14 @@
 import ProjectCard from "@/components/projects/ProjectCard"
+import { Metadata } from "next"
 import { BiSolidBoltCircle } from "react-icons/bi"
 import { FiGlobe } from "react-icons/fi"
 import { PiHexagonDuotone, PiPencilCircleDuotone } from "react-icons/pi"
 import { RiMoneyDollarCircleFill } from "react-icons/ri"
 import { TbHexagons } from "react-icons/tb"
+
+export const metadata: Metadata = {
+  title: "Projects | Troy Mackenzie-Smee",
+}
 
 type Project = {
   title: string
