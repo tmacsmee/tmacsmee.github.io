@@ -49,14 +49,14 @@ const projects: Project[] = [
 
 export default function ProjectsPage() {
   return (
-    <main className="">
-      <h1 className="mt-6 text-4xl font-bold text-slate-800 md:text-5xl">
+    <main>
+      <h1 className="text-4xl font-bold text-slate-800 md:text-5xl">
         Projects
       </h1>
       <p className="mt-6 text-slate-600">
         The stuff I&apos;ve worked on and the stuff I&apos;m working on.
       </p>
-      <div className="mt-14 grid grid-cols-3 gap-4">
+      <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map(({ title, description, href, icon }) => (
           <ProjectCard
             key={title}

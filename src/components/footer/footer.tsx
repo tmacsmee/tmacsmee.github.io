@@ -6,11 +6,11 @@ export default function Footer() {
   return (
     <footer>
       <div className="absolute inset-x-0 mx-auto h-px w-screen max-w-6xl bg-slate-100" />
-      <div className="pb-8 pt-8">
+      <div className="flex flex-col items-center pb-8 pt-8 sm:items-start">
         <Link href="/about" className="group inline-block size-6">
           <Logo className="size-full fill-slate-300 transition-colors group-hover:fill-sky-500" />
         </Link>
-        <div className="flex items-end justify-between text-sm">
+        <div className="flex w-full flex-col items-center justify-between text-sm sm:flex-row sm:items-end">
           <nav className="mt-6 flex gap-x-8">
             {navlinks.map(([child, href]) => (
               <Link
@@ -22,7 +22,7 @@ export default function Footer() {
               </Link>
             ))}
           </nav>
-          <span className="text-slate-400">
+          <span className="mt-4 text-slate-400 sm:mt-0">
             &copy; {new Date().getFullYear()} Troy Mackenzie-Smee
           </span>
         </div>

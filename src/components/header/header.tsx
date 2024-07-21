@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { FaGithub } from "react-icons/fa6"
-import { FiMenu } from "react-icons/fi"
 import Logo from "../svg/logo"
+import MobileNavigation from "./mobile-navigation"
 import Navlink from "./navlink"
 
 export const navlinks = [
@@ -31,7 +31,7 @@ export default function Header() {
         <FaGithub className="hover size-6 text-slate-400 transition-colors hover:text-sky-500" />
       </Link>
 
-      <FiMenu className="size-6 text-slate-400 hover:text-sky-500 md:hidden" />
+      <MobileNavigation />
     </header>
   )
 }
