@@ -1,0 +1,8 @@
+{
+  "name": "Troy Mackenzie-Smee",
+  "short_name": "Troy Mackenzie-Smee",
+  "description": "Troy Mackenzie-Smee's personal website",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#fff"
+}
