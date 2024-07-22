@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} relative bg-gray-50`}>
-        <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
           <div className="relative mx-auto h-full max-w-6xl">
             <div className="absolute -left-[300px] top-[200px] size-[500px] rounded-full bg-blue-300/25 blur-3xl" />
             <div className="absolute -left-[180px] top-[450px] size-[500px] rounded-full bg-indigo-300/20 blur-3xl" />
