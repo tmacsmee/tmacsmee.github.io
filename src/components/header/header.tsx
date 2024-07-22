@@ -12,7 +12,7 @@ export const navlinks = [
 
 export default function Header() {
   return (
-    <header className="fixed inset-x-0 mx-auto flex h-16 max-w-6xl items-center justify-between px-8 lg:px-24">
+    <header className="absolute inset-x-0 mx-auto flex h-16 max-w-6xl items-center justify-between px-8 lg:px-24">
       <Link href="/about" className="group">
         <Logo className="size-6 fill-slate-300 transition-colors group-hover:fill-sky-500" />
       </Link>
