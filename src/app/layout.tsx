@@ -33,7 +33,7 @@ export default function RootLayout({
         </div>
         <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col border-x border-x-slate-100 bg-white/70 px-8 shadow-xl lg:px-24">
           <Header />
-          <div className="flex-1 pb-16 pt-20 md:pt-32">{children}</div>
+          <div className="flex-1 pb-24 pt-20 md:pt-32">{children}</div>
           <Footer />
         </div>
       </body>
