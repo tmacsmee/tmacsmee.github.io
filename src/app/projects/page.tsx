@@ -40,7 +40,7 @@ const projects: Project[] = [
   {
     title: "Personal website",
     description: "This website, built with Next.js and Tailwind CSS.",
-    href: "https://github.com/tmacsmee/tmacsmee.github.io",
+    href: "https://github.com/tmacsmee/troymacsmee.io",
     icon: <FiGlobe className="size-[30px] text-sky-400" />,
   },
   {

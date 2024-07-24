@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://tmacsmee.github.io",
+  siteUrl: "https://troymacsmee.io",
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   output: "export",
