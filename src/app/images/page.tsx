@@ -29,7 +29,7 @@ export default function ImagesPage() {
         Feel free to use these images however you like. No permission or credit
         needed.
       </p>
-      <div className="flex flex-wrap gap-4 mt-4">
+      <div className="mt-6 flex flex-wrap gap-4">
         {images.map((image) => (
           <ZoomImage
             key={image.src.src}
