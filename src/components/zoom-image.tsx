@@ -90,7 +90,7 @@ export default function ZoomImage({
       <Portal.Root
         ref={backdropRef}
         aria-hidden
-        className="fixed inset-0 transition-opacity opacity-0 backdrop-blur-md pointer-events-none"
+        className="pointer-events-none fixed inset-0 opacity-0 backdrop-blur-md transition-opacity"
         onClick={toggle}
       />
 
@@ -101,6 +101,7 @@ export default function ZoomImage({
           {...imgProps}
           className={DEFAULT_CLASSNAME}
           unoptimized
+          placeholder="blur"
           onClick={toggle}
         />
       </div>

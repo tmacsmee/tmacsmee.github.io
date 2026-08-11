@@ -36,6 +36,7 @@ export function ProjectCard({
             src={image}
             alt={"placeholder"}
             fill
+            placeholder="blur"
             className="rounded-lg object-cover"
           />
           <animated.div
