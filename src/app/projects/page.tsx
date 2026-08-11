@@ -1,5 +1,6 @@
 import { PokeballFilled } from "@/components/pokeball";
 import { ProjectCard } from "@/components/project-card";
+import Title from "@/components/title";
 import GradientPokemonRL from "@/static/mesh-351.png";
 import GradientHnsw from "@/static/mesh-360.png";
 import GradientPokemonExpert from "@/static/mesh-577.png";
@@ -70,8 +71,7 @@ const projects: {
 export default function ProjectsPage() {
   return (
     <div>
-      <h1 className="text-3xl font-semibold tracking-tight">Projects</h1>
-      {/* <p className="mt-6">Some stuff I&apos;ve worked on.</p> */}
+      <Title>Projects</Title>
 
       <ul className="mt-6 grid grid-cols-1 gap-x-3 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map(({ id, icon, name, description, href, image }) => (

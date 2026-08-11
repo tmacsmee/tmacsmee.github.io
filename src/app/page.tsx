@@ -1,10 +1,10 @@
+import Title from "@/components/title";
+
 export default function Home() {
   return (
     <article>
-      <h1 className="text-3xl font-semibold tracking-tight">
-        Troy Mackenzie-Smee
-      </h1>
-      <p className="mt-6">
+      <Title>Troy Mackenzie-Smee</Title>
+      <p className="mt-6 font-sans text-sm text-stone-800 sm:text-base">
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
         ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
         dis parturient montes, nascetur ridiculus mus. Donec quam felis,

@@ -1,3 +1,4 @@
+import Title from "@/components/title";
 import ZoomImage from "@/components/zoom-image";
 import BlackHole from "@/public/images/black-hole.png";
 import Circles from "@/public/images/circles.png";
@@ -24,7 +25,7 @@ const images: { src: StaticImageData; alt: string; aspectRatio: number }[] = [
 export default function ImagesPage() {
   return (
     <div>
-      <h1 className="text-3xl font-semibold tracking-tight">Images</h1>
+      <Title>Images</Title>
       <p className="mt-6">
         Feel free to use these images however you like. No permission or credit
         needed.

@@ -2,7 +2,6 @@
 
 import { animated, useSpring } from "@react-spring/web";
 import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 
 export function ProjectCard({

@@ -1,11 +1,11 @@
 import Navigation from "@/components/navigation";
 import Shockwave from "@/components/shockwave";
 import type { Metadata } from "next";
-import { Inter_Tight } from "next/font/google";
+import { Inter, Inter_Tight } from "next/font/google";
 import { ViewTransition } from "react";
 import "./globals.css";
 
-const inter = Inter_Tight({
+const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
@@ -25,14 +25,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} antialiased bg-background min-h-screen font-sans`}
+        className={`${inter.variable} min-h-screen bg-background font-sans`}
       >
         <Shockwave />
-        <div className="sm:pt-20 py-6 lg:py-30 flex-col gap-y-6 sm:gap-y-0 sm:flex-row flex justify-center px-12 gap-x-10">
-          <Navigation />
-          <main className="max-w-3xl w-full">
-            <ViewTransition default="crossfade">{children}</ViewTransition>
-          </main>
+        <div className="px-6 py-6 sm:px-12 sm:pt-20 lg:py-30">
+          <div className="relative mx-auto flex max-w-3xl flex-col gap-y-6 sm:max-w-238 sm:flex-row sm:gap-x-10 sm:gap-y-0 xl:max-w-3xl">
+            <Navigation />
+            <main className="w-full max-w-3xl">
+              <ViewTransition default="crossfade">{children}</ViewTransition>
+            </main>
+          </div>
         </div>
       </body>
     </html>
