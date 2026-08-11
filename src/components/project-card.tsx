@@ -26,7 +26,7 @@ export function ProjectCard({
 
   return (
     <li
-      className="group"
+      className="group transition will-change-transform active:scale-95 active:opacity-90"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
