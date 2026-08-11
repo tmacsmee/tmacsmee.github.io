@@ -12,10 +12,6 @@ const links = [
 
 export default function Navigation() {
   return (
-    // On mobile the nav is a bar above the content, aligned to its right edge.
-    // From sm it is the grid's first column, stretched to the height of main so
-    // the links can stick, and pushed up against main by its own padding — that
-    // padding is what the gutter track cannot shrink below.
     <nav className="mb-6 sm:mb-0 sm:flex sm:items-start sm:justify-end sm:pr-(--nav-gap)">
       <ul className="sticky top-6 flex justify-end gap-5 sm:top-20 sm:flex-col sm:justify-normal lg:top-30">
         {links.map((link) => (
@@ -34,8 +30,8 @@ function Navlink({ href, text }: { href: string; text: string }) {
     <Link
       href={href}
       className={cn(
-        "relative text-base tracking-tighter transition lg:text-lg",
-        isActive ? "text-stone-900" : "text-stone-500 hover:blur-[1px]",
+        "relative text-base font-medium tracking-tighter transition lg:text-lg",
+        isActive ? "text-stone-800" : "text-stone-500 hover:blur-[1px]",
       )}
     >
       {text}

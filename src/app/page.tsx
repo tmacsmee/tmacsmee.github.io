@@ -1,10 +1,11 @@
+import Paragraph from "@/components/paragraph";
 import Title from "@/components/title";
 
 export default function Home() {
   return (
     <article>
       <Title>Troy Mackenzie-Smee</Title>
-      <p className="mt-6 font-sans text-sm text-stone-700 md:text-base">
+      <Paragraph className="mt-6">
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
         ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
         dis parturient montes, nascetur ridiculus mus. Donec quam felis,
@@ -15,7 +16,7 @@ export default function Home() {
         dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend
         tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
         enim.
-      </p>
+      </Paragraph>
     </article>
   );
 }

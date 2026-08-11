@@ -1,3 +1,4 @@
+import Paragraph from "@/components/paragraph";
 import Title from "@/components/title";
 import ZoomImage from "@/components/zoom-image";
 import BlackHole from "@/public/images/black-hole.png";
@@ -26,10 +27,10 @@ export default function ImagesPage() {
   return (
     <div>
       <Title>Images</Title>
-      <p className="mt-6">
+      <Paragraph className="mt-6">
         Feel free to use these images however you like. No permission or credit
         needed.
-      </p>
+      </Paragraph>
       <div className="mt-6 flex flex-wrap gap-4">
         {images.map((image) => (
           <ZoomImage
