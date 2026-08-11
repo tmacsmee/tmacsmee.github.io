@@ -12,8 +12,8 @@ const links = [
 
 export default function Navigation() {
   return (
-    <nav className="sm:w-36 sm:shrink-0 xl:absolute xl:right-full xl:mr-10 xl:h-full">
-      <ul className="flex sm:flex-col gap-5 sm:justify-normal justify-end sticky sm:top-20 top-6 lg:top-30">
+    <nav className="sm:shrink-0">
+      <ul className="sticky top-6 flex justify-end gap-5 sm:top-20 sm:flex-col sm:justify-normal lg:top-30">
         {links.map((link) => (
           <Navlink key={link.href} href={link.href} text={link.text} />
         ))}
@@ -30,8 +30,8 @@ function Navlink({ href, text }: { href: string; text: string }) {
     <Link
       href={href}
       className={cn(
-        "text-lg transition relative",
-        isActive ? "text-stone-900" : "text-stone-500 hover:blur-[1px]"
+        "relative text-base tracking-tighter transition lg:text-lg",
+        isActive ? "text-stone-900" : "text-stone-500 hover:blur-[1px]",
       )}
     >
       {text}
