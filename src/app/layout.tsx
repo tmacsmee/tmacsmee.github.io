@@ -1,7 +1,7 @@
 import Navigation from "@/components/navigation";
 import Shockwave from "@/components/shockwave";
 import type { Metadata } from "next";
-import { Inter, Inter_Tight } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ViewTransition } from "react";
 import "./globals.css";
 
@@ -29,9 +29,15 @@ export default function RootLayout({
       >
         <Shockwave />
         <div className="p-6 sm:p-8 sm:pt-20 md:p-12 md:pt-20 lg:pt-30">
-          <div className="relative mx-auto flex max-w-3xl flex-col gap-y-6 sm:max-w-238 sm:flex-row sm:gap-x-8 sm:gap-y-0 md:gap-x-12 lg:gap-x-20 xl:max-w-3xl xl:gap-x-30">
+          {/* --nav-column is the space reserved for the nav plus its gap
+              (--nav-width is an allowance for the widest link, not a measured
+              value; if the links outgrow it the gap gives way, see navigation).
+              --main-inset is where main starts: centred while there is room for
+              it, then pinned at the nav column, at which point the space on the
+              right runs out and main shrinks with the viewport. */}
+          <div className="relative [--main-inset:max(calc((100%-var(--container-3xl))/2),var(--nav-column))] [--nav-column:calc(var(--nav-width)+var(--nav-gap))] [--nav-gap:2rem] [--nav-width:4rem] md:[--nav-gap:3rem] lg:[--nav-gap:6rem]">
             <Navigation />
-            <main className="w-full max-w-3xl">
+            <main className="mx-auto max-w-3xl sm:mr-0 sm:ml-(--main-inset)">
               <ViewTransition default="crossfade">{children}</ViewTransition>
             </main>
           </div>

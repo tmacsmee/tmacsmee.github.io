@@ -12,7 +12,7 @@ const links = [
 
 export default function Navigation() {
   return (
-    <nav className="sm:shrink-0">
+    <nav className="mx-auto mb-6 max-w-3xl sm:absolute sm:inset-y-0 sm:right-[calc(100%-var(--main-inset))] sm:left-0 sm:mb-0 sm:flex sm:max-w-none sm:items-start sm:justify-end-safe sm:pr-(--nav-gap)">
       <ul className="sticky top-6 flex justify-end gap-5 sm:top-20 sm:flex-col sm:justify-normal lg:top-30">
         {links.map((link) => (
           <Navlink key={link.href} href={link.href} text={link.text} />
