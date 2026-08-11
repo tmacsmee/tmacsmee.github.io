@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   title: "Projects",
 };
 
+const iconClassName =
+  "size-16 text-white/85 mix-blend-overlay transition-colors group-hover:text-white";
+
 const projects: {
   id: number;
   icon: React.ReactNode;
@@ -24,7 +27,7 @@ const projects: {
 }[] = [
   {
     id: 0,
-    icon: <Layers className="size-16 text-white/90 mix-blend-overlay" />,
+    icon: <Layers className={iconClassName} />,
     name: "Hub-Aware HNSW",
     description: "A hub-aware HNSW index for efficient similarity search.",
     href: "https://github.com/tmacsmee/part-4-project",
@@ -32,9 +35,7 @@ const projects: {
   },
   {
     id: 1,
-    icon: (
-      <CircleDollarSign className="size-16 text-white/90 mix-blend-overlay" />
-    ),
+    icon: <CircleDollarSign className={iconClassName} />,
     name: "Coin Detector",
     description: "Detects coins in images using computer vision.",
     href: "https://github.com/tmacsmee/coin-detector",
@@ -42,9 +43,7 @@ const projects: {
   },
   {
     id: 2,
-    icon: (
-      <PokeballFilled className="size-16 text-white/90 mix-blend-overlay" />
-    ),
+    icon: <PokeballFilled className={iconClassName} />,
     name: "Pokémon Expert Agent",
     description: "An expert agent for Pokémon Showdown",
     href: "https://github.com/tmacsmee/pokemon-expert-agent",
@@ -52,9 +51,7 @@ const projects: {
   },
   {
     id: 3,
-    icon: (
-      <PokeballFilled className="size-16 text-white/90 mix-blend-overlay" />
-    ),
+    icon: <PokeballFilled className={iconClassName} />,
     name: "Pokémon RL Agent",
     description: "A reinforcement learning agent for Pokémon Showdown",
     href: "https://github.com/tmacsmee/pokemon-rl-agent",
@@ -62,7 +59,7 @@ const projects: {
   },
   {
     id: 4,
-    icon: <Plug className="size-16 text-white/90 mix-blend-overlay" />,
+    icon: <Plug className={iconClassName} />,
     name: "Sockchat",
     description: "A command line chat application using sockets.",
     href: "https://github.com/tmacsmee/sockchat",

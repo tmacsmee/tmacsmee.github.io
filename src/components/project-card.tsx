@@ -21,7 +21,7 @@ export function ProjectCard({
   const [hovered, setHovered] = useState(false);
 
   const iconSpring = useSpring({
-    scale: hovered ? 1.1 : 1,
+    scale: hovered ? 1.05 : 1,
     config: { tension: 400, friction: 16 },
   });
 
