@@ -31,7 +31,7 @@ export function ProjectCard({
       onMouseLeave={() => setHovered(false)}
     >
       <a href={href} target="_blank" className="flex flex-col gap-y-3">
-        <div className="relative flex h-40 items-center justify-center">
+        <div className="relative flex h-40 items-center justify-center lg:h-56">
           <Image
             src={image}
             alt={"placeholder"}
@@ -47,10 +47,10 @@ export function ProjectCard({
         </div>
 
         <div className="flex flex-col gap-y-1">
-          <h2 className="font-semibold text-neutral-800 transition group-hover:text-black">
+          <h2 className="text-sm font-semibold text-neutral-800 transition group-hover:text-black md:text-base">
             {name}
           </h2>
-          <p className="text-sm text-neutral-600">{description}</p>
+          <p className="text-xs text-neutral-600 md:text-sm">{description}</p>
         </div>
       </a>
     </li>

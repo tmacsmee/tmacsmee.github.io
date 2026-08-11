@@ -73,7 +73,7 @@ export default function ProjectsPage() {
     <div>
       <Title>Projects</Title>
 
-      <ul className="mt-6 grid grid-cols-1 gap-x-3 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-6 grid grid-cols-1 gap-x-3 gap-y-8 xs:grid-cols-2 md:grid-cols-3">
         {projects.map(({ id, icon, name, description, href, image }) => (
           <ProjectCard
             key={id}

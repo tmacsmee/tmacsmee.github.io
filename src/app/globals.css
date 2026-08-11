@@ -4,6 +4,10 @@ html {
   scrollbar-gutter: stable;
 }
 
+@theme {
+  --breakpoint-xs: 25rem;
+}
+
 @theme inline {
   --color-background: #fafaf9;
   --font-sans: var(--font-inter);
