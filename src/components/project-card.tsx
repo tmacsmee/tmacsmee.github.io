@@ -40,7 +40,7 @@ export function ProjectCard({
           />
           <animated.div
             style={iconSpring}
-            className="relative z-10 flex size-24 items-center justify-center rounded-lg bg-white/10 backdrop-blur-xs before:pointer-events-none before:absolute before:inset-0 before:rounded-lg before:bg-linear-to-br before:from-white/80 before:from-40% before:via-white/10 before:to-white/40 before:to-60% before:[mask-image:linear-gradient(#fff_0_0),linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:[mask-clip:content-box,border-box] before:p-px"
+            className="relative z-10 flex size-24 items-center justify-center rounded-lg bg-white/10 backdrop-blur-xs before:pointer-events-none before:absolute before:inset-0 before:rounded-lg before:bg-linear-to-br before:from-white/80 before:from-40% before:via-white/10 before:to-white/40 before:to-60% before:mask-[linear-gradient(#fff_0_0),linear-gradient(#fff_0_0)] before:mask-exclude before:[mask-clip:content-box,border-box] before:p-px"
           >
             {icon}
           </animated.div>
