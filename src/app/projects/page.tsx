@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 const iconClassName =
-  "size-16 text-white/85 mix-blend-overlay transition-colors group-hover:text-white";
+  "size-10 text-white/85 mix-blend-overlay transition-colors group-hover:text-white";
 
 const projects: {
   id: number;
