@@ -65,20 +65,3 @@ html {
   animation: appear 0.4s ease 0.2s forwards;
 }
 
-@keyframes shockwave {
-  0% {
-    width: 1px;
-    height: 1px;
-    filter: blur(1px);
-  }
-  100% {
-    width: 180px;
-    height: 180px;
-    filter: blur(40px);
-  }
-}
-
-.shockwave {
-  animation: shockwave 0.8s ease-out forwards;
-  /* animation: shockwave 1s cubic-bezier(0.2, 0, 0.8, 1) infinite; */
-}
