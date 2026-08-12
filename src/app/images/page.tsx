@@ -1,12 +1,12 @@
+import BlackHole from "@/assets/black-hole.png";
+import Circles from "@/assets/circles.png";
+import Eclipse from "@/assets/eclipse.png";
+import Fold from "@/assets/fold.png";
+import Giant from "@/assets/giant.png";
+import Wave from "@/assets/wave.png";
 import Paragraph from "@/components/paragraph";
 import Title from "@/components/title";
 import ZoomImage from "@/components/zoom-image";
-import BlackHole from "@/public/images/black-hole.png";
-import Circles from "@/public/images/circles.png";
-import Eclipse from "@/public/images/eclipse.png";
-import Fold from "@/public/images/fold.png";
-import Giant from "@/public/images/giant.png";
-import Wave from "@/public/images/wave.png";
 import { Metadata } from "next";
 import { StaticImageData } from "next/image";
 

@@ -30,7 +30,7 @@ function Navlink({ href, text }: { href: string; text: string }) {
     <Link
       href={href}
       className={cn(
-        "relative text-base font-medium tracking-tighter transition lg:text-lg",
+        "relative text-base tracking-tighter transition lg:text-lg",
         isActive ? "text-stone-800" : "text-stone-500 hover:blur-[1px]",
       )}
     >
