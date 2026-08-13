@@ -48,9 +48,11 @@ export function ProjectCard({
         </div>
 
         <div className="flex flex-col gap-y-1">
-          <h2 className="text-sm font-semibold text-stone-800 transition group-hover:text-black md:text-base">
-            {name}
-          </h2>
+          <div>
+            <h2 className="text-sm font-semibold text-stone-800 transition group-hover:text-black md:text-base">
+              {name}
+            </h2>
+          </div>
           <p className="text-xs text-stone-600 md:text-sm">{description}</p>
         </div>
       </a>

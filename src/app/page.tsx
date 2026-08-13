@@ -2,6 +2,7 @@ import GitHub from "@/assets/svg/github.svg";
 import Linkedin from "@/assets/svg/linkedin.svg";
 import Paragraph from "@/components/paragraph";
 import Title from "@/components/title";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,6 +14,23 @@ export default function Home() {
         learn new things.
       </Paragraph>
 
+      <Paragraph className="mt-6">
+        In the past, I've designed and built decentralized finance applications,
+        integrated payment systems, and used 3D web rendering to create an
+        interactive Minecraft server map.
+      </Paragraph>
+
+      <Paragraph className="mt-6">
+        Check out my{" "}
+        <Link
+          href="/projects"
+          className="underline decoration-stone-400 decoration-dotted underline-offset-4 hover:decoration-stone-600"
+        >
+          Projects
+        </Link>{" "}
+        to see what else I've been working on.
+      </Paragraph>
+
       <div className="mt-6 w-10 border-t border-stone-300" />
 
       <div className="mt-6 flex gap-x-3">
@@ -21,14 +39,14 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Linkedin className="size-6 text-stone-500 hover:text-stone-800" />
+          <Linkedin className="size-6 text-stone-500 transition-colors hover:text-stone-800" />
         </a>
         <a
           href="https://github.com/tmacsmee"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <GitHub className="size-6 text-stone-500 hover:text-stone-800" />
+          <GitHub className="size-6 text-stone-500 transition-colors hover:text-stone-800" />
         </a>
       </div>
     </article>
