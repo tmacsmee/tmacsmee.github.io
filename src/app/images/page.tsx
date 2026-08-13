@@ -14,13 +14,12 @@ export const metadata: Metadata = {
   title: "Images",
 };
 
-const images: { src: StaticImageData; alt: string; aspectRatio: number }[] = [
-  { src: Circles, alt: "Circles", aspectRatio: 16 / 9 },
-  { src: Eclipse, alt: "Eclipse", aspectRatio: 16 / 9 },
-  { src: Giant, alt: "Giant", aspectRatio: 16 / 9 },
-  { src: BlackHole, alt: "Black Hole", aspectRatio: 16 / 9 },
-  { src: Fold, alt: "Fold", aspectRatio: 1 },
-  { src: Wave, alt: "Wave", aspectRatio: 1 },
+const images: { src: StaticImageData; alt: string }[] = [
+  { src: Circles, alt: "Circles" },
+  { src: Eclipse, alt: "Eclipse" },
+  { src: Wave, alt: "Wave" },
+  { src: Giant, alt: "Giant" },
+  { src: BlackHole, alt: "Black Hole" },
 ];
 
 export default function ImagesPage() {
@@ -31,15 +30,12 @@ export default function ImagesPage() {
         Feel free to use these images however you like. No permission or credit
         needed.
       </Paragraph>
-      <div className="mt-6 flex flex-wrap gap-4">
+      <div className="mt-6 flex flex-wrap gap-3">
         {images.map((image) => (
           <ZoomImage
             key={image.src.src}
             src={image.src}
             alt={image.alt}
-            unoptimized
-            placeholder="blur"
-            aspectRatio={image.aspectRatio}
             className="h-34.5 w-auto"
           />
         ))}

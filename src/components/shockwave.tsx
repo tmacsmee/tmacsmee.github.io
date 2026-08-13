@@ -278,9 +278,8 @@ function runShockwave({ canvas, ctx, mask, maskCtx }: Surfaces) {
     for (const w of waves) {
       paintBand(maskCtx, w, "255,255,255", w.fade);
       // One soft shadow sitting on the crest gives the sheet some depth where
-      // the mesh lines are too sparse to read on their own. Keep it to a
-      // single band, or it reads as a second wavefront.
-      paintBand(ctx, w, "0,0,0", 0.035 * w.fade);
+      // the mesh lines are too sparse to read on their own.
+      paintBand(ctx, w, "0,0,0", 0.025 * w.fade);
     }
 
     traceMesh(ctx, waves, width, height);
