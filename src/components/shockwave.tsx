@@ -1,16 +1,9 @@
 "use client";
 
-/**
- * The page background is treated as a stretched mesh. A click sends a wave
- * packet travelling outward from the click point; every mesh vertex it passes
- * is pushed along the radius, so the grid bunches and spreads like a rubber
- * sheet. The mesh is only revealed where the wave is currently disturbing it,
- * which keeps the page clean at rest.
- */
 const SPACING = 36; // px between mesh lines
 const SEGMENT = 8; // px between sampled points along a line
 const SPEED = 500; // px/s the wavefront travels
-const LIFETIME = 2000; // ms a ripple lives for, so it dies out ~500px from the click
+const LIFETIME = 2000; // ms a ripple lives for, so it dies out ~1000px from the click
 const AMPLITUDE = 12; // px of peak in-plane displacement
 const WAVELENGTH = 0.4; // wave packet width, as a fraction of the radius
 const MIN_WAVELENGTH = 45; // px, keeps the packet sane at small radii
@@ -24,7 +17,6 @@ const TAU = Math.PI * 2;
 
 type Ripple = { x: number; y: number; start: number };
 
-/** One ripple frozen at an instant: everything a frame needs to draw it. */
 type Wave = {
   x: number;
   y: number;
@@ -39,17 +31,10 @@ type Wave = {
   fade: number; // envelope that eases the ripple in on birth and out on death
 };
 
-type Box = { minX: number; minY: number; maxX: number; maxY: number };
-
-/**
- * A single crest: every vertex the front reaches is pushed outward, then
- * relaxes as it passes. An oscillating packet here would read as two fronts.
- */
 function packet(phase: number) {
   return Math.exp(-phase * phase * 2.5);
 }
 
-/** Where the wavefront has got to, and how strong it still is. */
 function wave(ripple: Ripple, now: number): Wave {
   const elapsed = now - ripple.start;
   const age = elapsed / LIFETIME;
@@ -65,8 +50,6 @@ function wave(ripple: Ripple, now: number): Wave {
     y: ripple.y,
     radius,
     band,
-    // Dies down over its life, and loses height as the front stretches over an
-    // ever longer circumference.
     amplitude:
       AMPLITUDE *
       (1 - age) ** 1.5 *
@@ -82,12 +65,11 @@ function wave(ripple: Ripple, now: number): Wave {
 
 /**
  * Scratch output for `displace`, which runs for thousands of vertices a frame
- * and so must not allocate a result for each one. Every read happens in the
- * statement after the call that filled it.
+ * and is the one hot loop here. Every read happens in the statement after the
+ * call that filled it.
  */
 const displacement = { x: 0, y: 0, disturbed: false };
 
-/** In-plane displacement of a mesh vertex, summed over the live waves. */
 function displace(waves: Wave[], x: number, y: number) {
   displacement.x = 0;
   displacement.y = 0;
@@ -110,15 +92,12 @@ function displace(waves: Wave[], x: number, y: number) {
   }
 }
 
-/** Scratch output for `measureSpan`, on the same terms as `displacement`. */
-const span = { from: 0, samples: 0 };
-
 /**
  * The stretch of one mesh line that any wave still reaches, clamped to
- * `limitFrom`..`limitTo` and snapped to the global sample grid. Lines no wave
- * reaches come back empty, which is most of them once the redrawn region is the
- * hull of several ripples rather than one. A sample of margin at each end
- * leaves room to open and close a run on an undisturbed vertex.
+ * `limitFrom`..`limitTo` and snapped to the global sample grid. Culls most of
+ * the canvas while the ripples are small and spread out, and little once they
+ * have grown into each other. A sample of margin at each end leaves room to
+ * open and close a run on an undisturbed vertex.
  */
 function measureSpan(
   waves: Wave[],
@@ -131,9 +110,9 @@ function measureSpan(
   let hi = -Infinity;
 
   for (const w of waves) {
-    // Half the chord the wave's outer circle cuts out of this line. Zero is
-    // kept rather than skipped: a line that only grazes the circle still has
-    // the one vertex on it, and `displace` counts that vertex as disturbed.
+    // Half the chord this line cuts through the wave's outer circle. A zero
+    // half is kept, not skipped: a line that only grazes the circle still has
+    // the one vertex on it, which `displace` counts as disturbed.
     const offset = fixed - (vertical ? w.x : w.y);
     const halfSq = w.outerSq - offset * offset;
     if (halfSq < 0) continue;
@@ -148,17 +127,12 @@ function measureSpan(
     limitFrom,
   );
   const to = Math.min(hi + SEGMENT, limitTo);
-  span.from = from;
-  span.samples = to < from ? 0 : Math.floor((to - from) / SEGMENT) + 1;
+  return {
+    from,
+    samples: to < from ? 0 : Math.floor((to - from) / SEGMENT) + 1,
+  };
 }
 
-/**
- * Strokes one mesh line, walking `samples` points from (`startX`, `startY`)
- * along (`stepX`, `stepY`), and skipping the stretches no wave is touching —
- * for a wave well clear of its origin that is most of the line. Each visible run
- * is extended by the sample either side of it so the stroke runs out to where
- * the mask has faded to nothing.
- */
 function traceLine(
   ctx: CanvasRenderingContext2D,
   waves: Wave[],
@@ -202,31 +176,27 @@ function traceLine(
   }
 }
 
-/** Strokes the mesh across `box` as one path, so it takes a single stroke. */
-function traceMesh(ctx: CanvasRenderingContext2D, waves: Wave[], box: Box) {
-  // Lines and sample points both sit on fixed grids, so vertices stay put from
-  // frame to frame instead of crawling as the redrawn region grows.
-  const firstSampleX = Math.ceil(box.minX / SEGMENT) * SEGMENT;
-  const firstSampleY = Math.ceil(box.minY / SEGMENT) * SEGMENT;
-
+/**
+ * Strokes every line into one path, so the mesh takes a single stroke. Both
+ * grids start at the origin, so vertices stay put from frame to frame instead
+ * of crawling.
+ */
+function traceMesh(
+  ctx: CanvasRenderingContext2D,
+  waves: Wave[],
+  width: number,
+  height: number,
+) {
   ctx.beginPath();
 
-  for (
-    let x = Math.ceil(box.minX / SPACING) * SPACING;
-    x <= box.maxX;
-    x += SPACING
-  ) {
-    measureSpan(waves, x, true, firstSampleY, box.maxY);
+  for (let x = 0; x <= width; x += SPACING) {
+    const span = measureSpan(waves, x, true, 0, height);
     if (span.samples === 0) continue;
     traceLine(ctx, waves, x, span.from, 0, SEGMENT, span.samples);
   }
 
-  for (
-    let y = Math.ceil(box.minY / SPACING) * SPACING;
-    y <= box.maxY;
-    y += SPACING
-  ) {
-    measureSpan(waves, y, false, firstSampleX, box.maxX);
+  for (let y = 0; y <= height; y += SPACING) {
+    const span = measureSpan(waves, y, false, 0, width);
     if (span.samples === 0) continue;
     traceLine(ctx, waves, span.from, y, SEGMENT, 0, span.samples);
   }
@@ -236,7 +206,6 @@ function traceMesh(ctx: CanvasRenderingContext2D, waves: Wave[], box: Box) {
   ctx.stroke();
 }
 
-/** Fills the annulus a wave occupies, fading out towards both edges. */
 function paintBand(
   target: CanvasRenderingContext2D,
   w: Wave,
@@ -264,30 +233,7 @@ function paintBand(
   target.fill();
 }
 
-/** The region the live waves cover, clamped to the canvas. */
-function boundWaves(waves: Wave[], width: number, height: number, box: Box) {
-  box.minX = Infinity;
-  box.minY = Infinity;
-  box.maxX = -Infinity;
-  box.maxY = -Infinity;
-
-  for (const w of waves) {
-    box.minX = Math.min(box.minX, w.x - w.outer);
-    box.minY = Math.min(box.minY, w.y - w.outer);
-    box.maxX = Math.max(box.maxX, w.x + w.outer);
-    box.maxY = Math.max(box.maxY, w.y + w.outer);
-  }
-
-  box.minX = Math.max(box.minX, 0);
-  box.minY = Math.max(box.minY, 0);
-  box.maxX = Math.min(box.maxX, width);
-  box.maxY = Math.min(box.maxY, height);
-}
-
-/**
- * The visible canvas, plus the offscreen mask the mesh is cut back with. The
- * two are always sized and transformed together.
- */
+/** The visible canvas and its mask are always sized and transformed together. */
 type Surfaces = {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
@@ -297,29 +243,23 @@ type Surfaces = {
 
 /**
  * Starts listening for clicks and animating the ripples they leave, and returns
- * the teardown. Kept out of the component so the surfaces arrive already
- * checked: the effect does the null handling once, at the boundary.
+ * the teardown. Kept out of `attach` so the surfaces arrive already checked.
  */
 function runShockwave({ canvas, ctx, mask, maskCtx }: Surfaces) {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const ripples: Ripple[] = [];
-  const box: Box = { minX: 0, minY: 0, maxX: 0, maxY: 0 };
   let frame: number | null = null;
   let width = 0;
   let height = 0;
-  let left = 0;
-  let top = 0;
 
   function resize() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    // Measure the canvas itself rather than the window: the scrollbar gutter
-    // keeps it narrower than `innerWidth`, and sizing the buffer from the
-    // window would stretch the drawing sideways, away from the pointer.
+    // Measure the canvas rather than the window: the scrollbar gutter keeps it
+    // narrower than `innerWidth`, and sizing the buffer from the window would
+    // stretch the drawing sideways, away from the pointer.
     const rect = canvas.getBoundingClientRect();
     width = rect.width;
     height = rect.height;
-    left = rect.left;
-    top = rect.top;
     for (const surface of [canvas, mask]) {
       surface.width = Math.round(width * dpr);
       surface.height = Math.round(height * dpr);
@@ -335,18 +275,15 @@ function runShockwave({ canvas, ctx, mask, maskCtx }: Surfaces) {
     ctx.clearRect(0, 0, width, height);
     maskCtx.clearRect(0, 0, width, height);
 
-    // Only the annuli the waves currently occupy have to be redrawn.
-    boundWaves(waves, width, height, box);
-
     for (const w of waves) {
       paintBand(maskCtx, w, "255,255,255", w.fade);
       // One soft shadow sitting on the crest gives the sheet some depth where
       // the mesh lines are too sparse to read on their own. Keep it to a
       // single band, or it reads as a second wavefront.
-      paintBand(ctx, w, "0,0,0", 0.025 * w.fade);
+      paintBand(ctx, w, "0,0,0", 0.035 * w.fade);
     }
 
-    traceMesh(ctx, waves, box);
+    traceMesh(ctx, waves, width, height);
 
     ctx.globalCompositeOperation = "destination-in";
     ctx.drawImage(mask, 0, 0, width, height);
@@ -372,12 +309,13 @@ function runShockwave({ canvas, ctx, mask, maskCtx }: Surfaces) {
 
   function handleClick(event: MouseEvent) {
     if (reducedMotion.matches) return;
-    // Clicks can arrive faster than ripples expire, and each live one is
-    // another pass over every vertex, so retire the oldest to bound the work.
+    // Clicks can arrive faster than ripples expire, so retire the oldest.
     if (ripples.length >= RIPPLE_LIMIT) ripples.shift();
+    // The canvas is fixed at the viewport origin, so client coords are already
+    // canvas coords.
     ripples.push({
-      x: event.clientX - left,
-      y: event.clientY - top,
+      x: event.clientX,
+      y: event.clientY,
       start: performance.now(),
     });
     if (frame === null) frame = requestAnimationFrame(tick);
@@ -396,29 +334,17 @@ function runShockwave({ canvas, ctx, mask, maskCtx }: Surfaces) {
   };
 }
 
-/**
- * Ref callback rather than an effect: the setup owns a DOM node and nothing
- * else, so hanging it off that node's own lifetime drops the ref indirection
- * and hands the element over already non-null. Declared at module scope so the
- * reference is stable and React never tears down and re-attaches on a render.
- */
 function attach(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext("2d");
-  // The mesh is drawn in full, then cut back to the disturbed region with this
-  // mask, so overlapping ripples each reveal their own band.
   const mask = document.createElement("canvas");
   const maskCtx = mask.getContext("2d");
-  // Return a cleanup on every path, even the do-nothing one: React only falls
-  // back to calling the ref a second time with `null` when it doesn't get one,
-  // and this callback does not take null.
+
   if (!ctx || !maskCtx) return () => {};
 
   return runShockwave({ canvas, ctx, mask, maskCtx });
 }
 
 export default function Shockwave() {
-  // A canvas is a replaced element: without an explicit `h-full w-full` it lays
-  // out at its intrinsic (attribute) size instead of filling the inset box.
   return (
     <canvas
       ref={attach}
