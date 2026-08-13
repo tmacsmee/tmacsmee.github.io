@@ -17,7 +17,7 @@ export default function Home() {
 
       <div className="mt-6 flex gap-x-3">
         <a
-          href="https://www.linkedin.com/in/tmacsmee/"
+          href="https://www.linkedin.com/in/troymacsmee/"
           target="_blank"
           rel="noopener noreferrer"
         >
