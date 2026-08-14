@@ -1,8 +1,8 @@
-import GradientSockchat from "@/assets/mesh-black.png";
-import GradientHnsw from "@/assets/mesh-blue.png";
-import GradientCoin from "@/assets/mesh-gold.png";
-import GradientPokemonRL from "@/assets/mesh-green.png";
-import GradientPokemonExpert from "@/assets/mesh-pink.png";
+import GradientSockchat from "@/assets/mesh-black.webp";
+import GradientHnsw from "@/assets/mesh-blue.webp";
+import GradientCoin from "@/assets/mesh-gold.webp";
+import GradientPokemonRL from "@/assets/mesh-green.webp";
+import GradientPokemonExpert from "@/assets/mesh-pink.webp";
 import { PokeballFilled } from "@/components/pokeball";
 import { ProjectCard } from "@/components/project-card";
 import Title from "@/components/title";
