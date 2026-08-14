@@ -1,7 +1,5 @@
 import BlackHole from "@/assets/black-hole.png";
-import Circles from "@/assets/circles.png";
 import Eclipse from "@/assets/eclipse.png";
-import Fold from "@/assets/fold.png";
 import Giant from "@/assets/giant.png";
 import Wave from "@/assets/wave.png";
 import Paragraph from "@/components/paragraph";
@@ -15,7 +13,6 @@ export const metadata: Metadata = {
 };
 
 const images: { src: StaticImageData; alt: string }[] = [
-  { src: Circles, alt: "Circles" },
   { src: Eclipse, alt: "Eclipse" },
   { src: Wave, alt: "Wave" },
   { src: Giant, alt: "Giant" },
@@ -27,8 +24,7 @@ export default function ImagesPage() {
     <div>
       <Title>Images</Title>
       <Paragraph className="mt-6">
-        Feel free to use these images however you like. No permission or credit
-        needed.
+        Feel free to use these images however you like.
       </Paragraph>
       <div className="mt-6 flex flex-wrap gap-3">
         {images.map((image) => (
