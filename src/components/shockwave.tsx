@@ -14,6 +14,10 @@ const FADE = 1.5; // how sharply the ripple dims over its life; higher fades soo
 const RIPPLE_LIMIT = 6; // live ripples; each one adds work at every mesh vertex
 const MESH = "rgba(0,0,0,0.1)";
 const TAU = Math.PI * 2;
+// Anything the click already means something to. A ripple under a link or a
+// button reads as a second, competing response to the same press.
+const INTERACTIVE =
+  'a[href],button,input,select,textarea,label,summary,[role="button"],[role="link"],[contenteditable=""],[contenteditable="true"]';
 
 type Ripple = { x: number; y: number; start: number };
 
@@ -308,6 +312,10 @@ function runShockwave({ canvas, ctx, mask, maskCtx }: Surfaces) {
 
   function handleClick(event: MouseEvent) {
     if (reducedMotion.matches) return;
+    // `closest` rather than a check on the target itself, so a click landing on
+    // the icon or text inside a control still counts as a click on the control.
+    const target = event.target;
+    if (target instanceof Element && target.closest(INTERACTIVE)) return;
     // Clicks can arrive faster than ripples expire, so retire the oldest.
     if (ripples.length >= RIPPLE_LIMIT) ripples.shift();
     // The canvas is fixed at the viewport origin, so client coords are already
