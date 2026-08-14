@@ -9,15 +9,15 @@ export default function Home() {
     <article>
       <Title>Troy Mackenzie-Smee</Title>
       <Paragraph className="mt-6">
-        I'm a software engineer with interests spanning web development,
+        I&apos;m a software engineer with interests spanning web development,
         finance, blockchain, and game design. I love to work creatively and
         learn new things.
       </Paragraph>
 
       <Paragraph className="mt-6">
-        In the past, I've designed and built decentralized finance applications,
-        3D maps for Minecraft servers, and optimised vector database search
-        algorithms.
+        In the past, I&apos;ve designed and built decentralized finance
+        applications, 3D maps for Minecraft servers, and optimised vector
+        database search algorithms.
       </Paragraph>
 
       <Paragraph className="mt-6">
@@ -28,7 +28,7 @@ export default function Home() {
         >
           projects
         </Link>{" "}
-        to see what else I've been working on.
+        to see what else I&apos;ve been working on.
       </Paragraph>
 
       <div className="mt-6 w-10 border-t border-stone-300" />

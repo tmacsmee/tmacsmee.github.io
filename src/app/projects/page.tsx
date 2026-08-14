@@ -3,7 +3,7 @@ import GradientHnsw from "@/assets/mesh-blue.webp";
 import GradientCoin from "@/assets/mesh-gold.webp";
 import GradientPokemonRL from "@/assets/mesh-green.webp";
 import GradientPokemonExpert from "@/assets/mesh-pink.webp";
-import { PokeballFilled } from "@/components/pokeball";
+import Pokeball from "@/assets/svg/pokeball.svg";
 import { ProjectCard } from "@/components/project-card";
 import Title from "@/components/title";
 import { CircleDollarSign, Layers, Plug } from "lucide-react";
@@ -44,7 +44,7 @@ const projects: {
   },
   {
     id: 2,
-    icon: <PokeballFilled className={iconClassName} />,
+    icon: <Pokeball className={iconClassName} />,
     name: "Pokémon Expert Agent",
     description: "An expert agent for Pokémon Showdown",
     href: "https://github.com/tmacsmee/pokemon-expert-agent",
@@ -52,7 +52,7 @@ const projects: {
   },
   {
     id: 3,
-    icon: <PokeballFilled className={iconClassName} />,
+    icon: <Pokeball className={iconClassName} />,
     name: "Pokémon RL Agent",
     description: "A reinforcement learning agent for Pokémon Showdown",
     href: "https://github.com/tmacsmee/pokemon-rl-agent",
