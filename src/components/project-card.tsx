@@ -41,8 +41,9 @@ export function ProjectCard({
           />
           <animated.div
             style={iconSpring}
-            className="relative z-10 flex size-16 items-center justify-center rounded-lg bg-white/10 backdrop-blur-xs before:pointer-events-none before:absolute before:inset-0 before:rounded-lg before:bg-linear-to-br before:from-white/80 before:from-40% before:via-white/10 before:to-white/40 before:to-60% before:mask-[linear-gradient(#fff_0_0),linear-gradient(#fff_0_0)] before:mask-exclude before:[mask-clip:content-box,border-box] before:p-px"
+            className="relative z-10 flex size-16 items-center justify-center rounded-lg bg-white/8 backdrop-blur-xs will-change-transform"
           >
+            <div className="pointer-events-none absolute inset-0 rounded-lg bg-linear-to-br from-white/80 from-40% via-white/10 to-white/40 to-60% mask-b-to-white mask-exclude [mask-clip:content-box,border-box] p-px"></div>
             {icon}
           </animated.div>
         </div>
