@@ -16,8 +16,8 @@ export default function Home() {
 
       <Paragraph className="mt-6">
         In the past, I've designed and built decentralized finance applications,
-        integrated payment systems, and used 3D web rendering to create an
-        interactive Minecraft server map.
+        3D maps for Minecraft servers, and optimised vector database search
+        algorithms.
       </Paragraph>
 
       <Paragraph className="mt-6">
@@ -26,7 +26,7 @@ export default function Home() {
           href="/projects"
           className="underline decoration-stone-400 decoration-dotted underline-offset-4 hover:decoration-stone-600"
         >
-          Projects
+          projects
         </Link>{" "}
         to see what else I've been working on.
       </Paragraph>
