@@ -31,7 +31,7 @@ export function ProjectCard({
       onMouseLeave={() => setHovered(false)}
     >
       <a href={href} target="_blank" className="flex flex-col gap-y-3">
-        <div className="relative flex h-40 items-center justify-center lg:h-56">
+        <div className="relative flex h-40 items-center justify-center lg:h-54">
           <Image
             src={image}
             alt={"placeholder"}
