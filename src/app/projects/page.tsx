@@ -3,6 +3,8 @@ import GradientHnsw from "@/assets/mesh-blue.webp";
 import GradientCoin from "@/assets/mesh-gold.webp";
 import GradientPokemonRL from "@/assets/mesh-green.webp";
 import GradientPokemonExpert from "@/assets/mesh-pink.webp";
+import GradientCantina from "@/assets/mesh-red.webp";
+import Lego from "@/assets/svg/lego.svg";
 import Pokeball from "@/assets/svg/pokeball.svg";
 import { ProjectCard } from "@/components/project-card";
 import Title from "@/components/title";
@@ -19,7 +21,6 @@ const iconClassName =
   "size-10 text-white/85 mix-blend-overlay transition-colors group-hover:text-white";
 
 const projects: {
-  id: number;
   icon: React.ReactNode;
   name: React.ReactNode;
   description: string;
@@ -27,7 +28,13 @@ const projects: {
   image: StaticImageData;
 }[] = [
   {
-    id: 0,
+    icon: <Lego className={iconClassName} />,
+    name: "Cantina",
+    description: "A WebGL tribute to LEGO Star Wars: The Complete Saga.",
+    href: "https://tmacsmee.github.io/cantina",
+    image: GradientCantina,
+  },
+  {
     icon: <Layers className={iconClassName} />,
     name: "Hub-Aware HNSW",
     description: "A hub-aware HNSW index for efficient similarity search.",
@@ -35,7 +42,6 @@ const projects: {
     image: GradientHnsw,
   },
   {
-    id: 1,
     icon: <CircleDollarSign className={iconClassName} />,
     name: "Coin Detector",
     description: "Detects coins in images using computer vision.",
@@ -43,7 +49,6 @@ const projects: {
     image: GradientCoin,
   },
   {
-    id: 2,
     icon: <Pokeball className={iconClassName} />,
     name: "Pokémon Expert Agent",
     description: "An expert agent for Pokémon Showdown",
@@ -51,7 +56,6 @@ const projects: {
     image: GradientPokemonExpert,
   },
   {
-    id: 3,
     icon: <Pokeball className={iconClassName} />,
     name: "Pokémon RL Agent",
     description: "A reinforcement learning agent for Pokémon Showdown",
@@ -59,7 +63,6 @@ const projects: {
     image: GradientPokemonRL,
   },
   {
-    id: 4,
     icon: <Plug className={iconClassName} />,
     name: "Sockchat",
     description: "A command line chat application using sockets.",
@@ -68,22 +71,29 @@ const projects: {
   },
 ];
 
+const projectsWithKeys = projects.map((project, index) => ({
+  key: index,
+  ...project,
+}));
+
 export default function ProjectsPage() {
   return (
     <div>
       <Title>Projects</Title>
 
       <ul className="mt-6 grid grid-cols-1 gap-x-4 gap-y-10 xs:grid-cols-2 md:grid-cols-3">
-        {projects.map(({ id, icon, name, description, href, image }) => (
-          <ProjectCard
-            key={id}
-            icon={icon}
-            name={name}
-            description={description}
-            href={href}
-            image={image}
-          />
-        ))}
+        {projectsWithKeys.map(
+          ({ key, icon, name, description, href, image }) => (
+            <ProjectCard
+              key={key}
+              icon={icon}
+              name={name}
+              description={description}
+              href={href}
+              image={image}
+            />
+          ),
+        )}
       </ul>
     </div>
   );

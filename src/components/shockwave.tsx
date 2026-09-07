@@ -3,7 +3,7 @@
 const SPACING = 36; // px between mesh lines
 const SEGMENT = 8; // px between sampled points along a line
 const SPEED = 500; // px/s the wavefront travels
-const LIFETIME = 2000; // ms a ripple lives for, so it dies out ~1000px from the click
+const LIFETIME = 2000; // ms a ripple lives for
 const AMPLITUDE = 12; // px of peak in-plane displacement
 const WAVELENGTH = 0.4; // wave packet width, as a fraction of the radius
 const MIN_WAVELENGTH = 45; // px, keeps the packet sane at small radii
@@ -67,11 +67,6 @@ function wave(ripple: Ripple, now: number): Wave {
   };
 }
 
-/**
- * Scratch output for `displace`, which runs for thousands of vertices a frame
- * and is the one hot loop here. Every read happens in the statement after the
- * call that filled it.
- */
 const displacement = { x: 0, y: 0, disturbed: false };
 
 function displace(waves: Wave[], x: number, y: number) {
@@ -96,13 +91,6 @@ function displace(waves: Wave[], x: number, y: number) {
   }
 }
 
-/**
- * The stretch of one mesh line that any wave still reaches, clamped to
- * `limitFrom`..`limitTo` and snapped to the global sample grid. Culls most of
- * the canvas while the ripples are small and spread out, and little once they
- * have grown into each other. A sample of margin at each end leaves room to
- * open and close a run on an undisturbed vertex.
- */
 function measureSpan(
   waves: Wave[],
   fixed: number,
@@ -114,9 +102,6 @@ function measureSpan(
   let hi = -Infinity;
 
   for (const w of waves) {
-    // Half the chord this line cuts through the wave's outer circle. A zero
-    // half is kept, not skipped: a line that only grazes the circle still has
-    // the one vertex on it, which `displace` counts as disturbed.
     const offset = fixed - (vertical ? w.x : w.y);
     const halfSq = w.outerSq - offset * offset;
     if (halfSq < 0) continue;
@@ -180,11 +165,6 @@ function traceLine(
   }
 }
 
-/**
- * Strokes every line into one path, so the mesh takes a single stroke. Both
- * grids start at the origin, so vertices stay put from frame to frame instead
- * of crawling.
- */
 function traceMesh(
   ctx: CanvasRenderingContext2D,
   waves: Wave[],
@@ -237,7 +217,6 @@ function paintBand(
   target.fill();
 }
 
-/** The visible canvas and its mask are always sized and transformed together. */
 type Surfaces = {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
@@ -245,10 +224,6 @@ type Surfaces = {
   maskCtx: CanvasRenderingContext2D;
 };
 
-/**
- * Starts listening for clicks and animating the ripples they leave, and returns
- * the teardown. Kept out of `attach` so the surfaces arrive already checked.
- */
 function runShockwave({ canvas, ctx, mask, maskCtx }: Surfaces) {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const ripples: Ripple[] = [];
